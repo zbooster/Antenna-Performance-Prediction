@@ -3,8 +3,10 @@
 ![1](https://user-images.githubusercontent.com/104749023/184118019-4ab4e35c-b083-4257-9ea2-76d6ac5fd8da.PNG)
 
 ## 소개
-AI를 이용한 스마트 공장을 도입하는 중소기업이 늘어나고 있습니다. 제품의 불량율을 예측하는 부분에서 많이 활용되고 있으며, 기업의 경쟁력을 높여주고 있습니다.
+4차 산업이 발전하면서 AI를 이용한 스마트 공장을 도입하는 중소기업이 늘어나고 있습니다. 제품의 불량율을 예측하는 부분에서 많이 활용되고 있으며, 기업의 경쟁력을 높여주고 있습니다. 이번 프로젝트를 통해 모빌리티 AI에 대한 기초적인 모델 기반을 배울 수 있습니다.
+
 > [YTN - 제조 혁신의 아이콘 '스마트 공장'...중소·중견 기업으로 확대](https://n.news.naver.com/mnews/article/052/0001756416?sid=102)
+> [ETRI - 자율주행이 불러올 새로운 이동수단의 가치](https://www.etri.re.kr/webzine/20190705/sub01.html)
 
 DACON에 이와 관련된 대회가 있어 해당 대회에 참가하여 제공되는 데이터를 바탕으로 Deep Learning 기반의 성능예측 모델을 만들어 보겠습니다.
 > [DACON - 자율주행 센서의 안테나 성능 예측 AI 경진대회](https://dacon.io/competitions/official/235927/overview/description)
