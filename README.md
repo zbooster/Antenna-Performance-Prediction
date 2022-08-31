@@ -11,6 +11,7 @@
 
 이는 대회 참가팀 743개 팀 중에 12위라는 상위권 성적을 받을 수 있었습니다.
 
+![image](https://user-images.githubusercontent.com/100823210/187583450-5f3758b4-6c84-438b-af55-7c5547dd9b54.png)
 
 ## 
 
