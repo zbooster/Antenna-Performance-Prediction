@@ -25,6 +25,7 @@ DACON에 이와 관련된 대회가 있어 해당 대회에 참가하여 제공�
 
 ## 데이터 분석
 ### X Features (56개)
+![X Features](https://user-images.githubusercontent.com/100823210/188443938-b2b54706-6b31-4b32-a81c-d189415fae5d.png)
 
 * 제조공정에서 수집된 데이터. (학습데이터 기준 39,607건)
 * 검사통과여부 관련 값은 정수형(Int). 그 외 다른값은 실수형(Float)
@@ -44,7 +45,8 @@ DACON에 이와 관련된 대회가 있어 해당 대회에 참가하여 제공�
   * RF 부분 SMT 납 량
 
 
-### Y Target (14개)
+### Y Targets (14개)
+![Y Targets](https://user-images.githubusercontent.com/100823210/188444315-d80e3ea7-e5fe-40bc-906f-bf1f2351977d.png)
 * 생산된 안테나의 성능을 나타내는 데이터 (14건)
 * 모든값이 실수형(Float)
 * Null값은 존재하지 않음.
@@ -53,17 +55,20 @@ DACON에 이와 관련된 대회가 있어 해당 대회에 참가하여 제공�
   * (평균) 신호대 잡음비
 
 ### 반복되는 패턴 발생
+X축을 인덱스 기준으로 데이터를 나열하면, 아래와 같이 일정한 패턴을 보여주는 Feature들이 존재함. 즉, 조립과정에서 사용되는 기계의 동작이 일정한 Cycle을 가지고 있으며, 작은 Cycle이 6번 반복후에 좀 더 긴 Cycle이 6번 반복되는 모습을 보여주고 있음.
 ![X_03_방열재료1무게_인덱스기준](https://user-images.githubusercontent.com/100823210/188358475-609a879b-c73c-4b7a-afdd-5d71f45ccb97.png)
 
 ## 데이터 전처리
-### Log Scaler -> Min-Max Scaler 적용
+### Log Scaler
+아래 방열재료의 면적(X_07 ~ X_09)과, 투입 전 대기시간(X_49)의 경우, 심하게 한쪽으로 치우친 분포를 보여 np.log1p를 적용.
 ![Log Scaler](https://user-images.githubusercontent.com/100823210/188358677-fc2553c4-e780-47b3-a762-28b3c221066f.png)
 
-### 반복되는 패턴에 따른 Cycle내 인덱스 고유값 부여
+### 반복되는 패턴에 따른 Cycle의 고유값 부여
+반복되는 패턴마다 푸리에 특징을 사용하여 간단한 요소로 분해하고 데이터가 연속성을 가질 수 있도록 표현하기 위하여 인덱스를 Cycle의 시작마다 0로 리셋한 값을 다시 np.sin, np.cos 함수를 적용하여 Cycle의 특징을 잘 나타내도록 변환한 후에 추가합니다.
 ![Cycle내 인덱스 고유값](https://user-images.githubusercontent.com/100823210/188359026-9f59a943-fee0-4267-8be8-28450755939d.png)
 
 ## 이상치(Outlier) 제거
-Holt-Winters모델을 이용한 ExponentialSmoothing함수를 이용하여 Outlier 설정 및 제거
+앞서 데이터가 반복되는 특징을 가지고 있으며, Outlier도 이러한 Cycle에 영향을 받을 것으로 판단하여 지수평활법(ExponentialSmoothing)에서 Seasonality까지 고려하는 Holt-Winters 모델을 이용하여 Outlier 설정하고 제거해 보았습니다.
 ![Outlier 제거](https://user-images.githubusercontent.com/100823210/188359357-f766f6e9-dee4-4dd5-8724-8c80c543502e.png)
 
 ## 결론 및 한계점
@@ -84,6 +89,7 @@ Holt-Winters모델을 이용한 ExponentialSmoothing함수를 이용하여 Outli
 
 ## 참조문헌
 * [시계열 데이터 전처리(Encoding Time Step Features)](https://today-1.tistory.com/55)
+* [마고커 - Exponential Smoothing을 활용한 이상탐지](https://magoker.tistory.com/120) 
 * [제조 공정에서의 실시간 불량 탐지를 위한 딥러닝 모델 적용 연구](http://ktappi.kr/xml/30929/30929.pdf)
 * [반도체 설비 센서 데이터를 활용한 딥러닝 기반의불량예측 모델에 관한 연구](https://www.koreascience.or.kr/article/CFKO202125036042269.pdf)
 * [제조 공정에서 센서와 머신러닝을 활용한 불량예측 방안에 대한 연구](http://entrue.com/files/[4_2]%2089-98P_%EC%A0%9C%EC%A1%B0%20%EA%B3%B5%EC%A0%95_%ED%95%9C%EB%AC%B4%EB%AA%85%EC%B4%88.pdf)
