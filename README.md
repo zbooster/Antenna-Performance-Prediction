@@ -43,7 +43,10 @@ DACON에 이와 관련된 대회가 있어 해당 대회에 참가하여 제공�
   * 레이돔 치수
   * 안테나 부분 레이돔 기울기
   * RF 부분 SMT 납 량
-
+### X Features: 검사 통과 여부
+ - 검사 통과 여부를 나타내는 Feature는 값이 모두 1임
+ - X_04, X_23, X_47, X_48
+ - 각 Feature는 성능 예측과 관계없는 부분이라 제외
 
 ### Y Targets (14개)
 ![Y Targets](https://user-images.githubusercontent.com/100823210/188444315-d80e3ea7-e5fe-40bc-906f-bf1f2351977d.png)
@@ -58,6 +61,16 @@ DACON에 이와 관련된 대회가 있어 해당 대회에 참가하여 제공�
 X축을 인덱스 기준으로 데이터를 나열하면, 아래와 같이 일정한 패턴을 보여주는 Feature들이 존재함. 즉, 조립과정에서 사용되는 기계의 동작이 일정한 Cycle을 가지고 있으며, 작은 Cycle이 6번 반복후에 좀 더 긴 Cycle이 6번 반복되는 모습을 보여주고 있음.
 ![X_03_방열재료1무게_인덱스기준](https://user-images.githubusercontent.com/100823210/188358475-609a879b-c73c-4b7a-afdd-5d71f45ccb97.png)
 
+ ### 반복적인 패턴 전반부
+  - X_30값을 1.425 기준으로 6개의 패턴으로 분리 가능.
+  - X_30, X_32가 대표적인 예
+  ![1](https://user-images.githubusercontent.com/104749023/188459390-2426c422-1258-4646-918c-96b7f102fd23.PNG)
+
+ ### 반복적인 패턴 후반부
+ - X_26값을 2.03 기준으로 6개의 패턴 분리 가능.
+ - X_26, X_27, X_28, X_29가 대표적인 예
+ ![1](https://user-images.githubusercontent.com/104749023/188459692-da936bd5-9c60-445b-bf47-62f5ce8587ae.PNG)
+
 ## 데이터 전처리
 ### Log Scaler
 아래 방열재료의 면적(X_07 ~ X_09)과, 투입 전 대기시간(X_49)의 경우, 심하게 한쪽으로 치우친 분포를 보여 np.log1p를 적용.
@@ -67,6 +80,8 @@ X축을 인덱스 기준으로 데이터를 나열하면, 아래와 같이 일�
 반복되는 패턴마다 푸리에 특징을 사용하여 간단한 요소로 분해하고 데이터가 연속성을 가질 수 있도록 표현하기 위하여 인덱스를 Cycle의 시작마다 0로 리셋한 값을 다시 np.sin, np.cos 함수를 적용하여 Cycle의 특징을 잘 나타내도록 변환한 후에 추가합니다.
 ![Cycle내 인덱스 고유값](https://user-images.githubusercontent.com/100823210/188359026-9f59a943-fee0-4267-8be8-28450755939d.png)
 
+ - 푸리에 변환: 임의의 입력 신호를 다양한 주파수를 갖는 주기 함수들의 합으로 변환하여 표현
+ 
 ## 이상치(Outlier) 제거
 앞서 데이터가 반복되는 특징을 가지고 있으며, Outlier도 이러한 Cycle에 영향을 받을 것으로 판단하여 지수평활법(ExponentialSmoothing)에서 Seasonality까지 고려하는 Holt-Winters 모델을 이용하여 Outlier 설정하고 제거해 보았습니다.
 아래 그림에서 점선은 ExponentialSmoothing함수로 설정한 Outlier 기준선으로 직선으로 데이터를 자르는 IQR대비 Cycle의 반복을 더 잘 반영하여 Outlier를 찾아냅니다.
