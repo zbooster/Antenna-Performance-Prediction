@@ -69,6 +69,7 @@ X축을 인덱스 기준으로 데이터를 나열하면, 아래와 같이 일�
 
 ## 이상치(Outlier) 제거
 앞서 데이터가 반복되는 특징을 가지고 있으며, Outlier도 이러한 Cycle에 영향을 받을 것으로 판단하여 지수평활법(ExponentialSmoothing)에서 Seasonality까지 고려하는 Holt-Winters 모델을 이용하여 Outlier 설정하고 제거해 보았습니다.
+아래 그림에서 점선은 ExponentialSmoothing함수로 설정한 Outlier 기준선으로 직선으로 데이터를 자르는 IQR대비 Cycle의 반복을 더 잘 반영하여 Outlier를 찾아냅니다.
 ![Outlier 제거](https://user-images.githubusercontent.com/100823210/188359357-f766f6e9-dee4-4dd5-8724-8c80c543502e.png)
 
 ## 결론 및 한계점
