@@ -85,3 +85,9 @@ Holt-Winters모델을 이용한 ExponentialSmoothing함수를 이용하여 Outli
 * [반도체 설비 센서 데이터를 활용한 딥러닝 기반의불량예측 모델에 관한 연구](https://www.koreascience.or.kr/article/CFKO202125036042269.pdf)
 * [제조 공정에서 센서와 머신러닝을 활용한 불량예측 방안에 대한 연구](http://entrue.com/files/[4_2]%2089-98P_%EC%A0%9C%EC%A1%B0%20%EA%B3%B5%EC%A0%95_%ED%95%9C%EB%AC%B4%EB%AA%85%EC%B4%88.pdf)
 * [기계학습 알고리즘을 활용한 베어링의 고장 예측 알고리즘 개발에 관한 연구](https://e-jamet.org/_common/do.php?a=full&b=52&bidx=1652&aidx=20609)
+
+## 팀원 소개 
+|팀원|연락|
+|------|---|
+|김송현|[G.mail](zpaladin1213@gmail.com) │ [Velog](https://velog.io/@zbooster)|
+|김해솔|[G.mail](lunchtime99@gmail.com) │ [Velog](https://velog.io/@kim_haesol)|
